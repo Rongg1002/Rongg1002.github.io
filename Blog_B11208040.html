@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汪星人全攻略 - 像素可愛部落格</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+TC:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pixel: {
+                            base: '#2D1B4E',
+                            surface: '#4B3F72',
+                            accent: '#FFD700',
+                            pink: '#FF6B6B',
+                            mint: '#1DE9B6',
+                            cream: '#FFF9E1'
+                        }
+                    },
+                    fontFamily: {
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                        display: ['"ZCOOL KuaiLe"', 'cursive'],
+                        body: ['"Noto Sans TC"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'pixel': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'pixel-hover': '6px 6px 0px 0px rgba(0,0,0,1)',
+                        'pixel-inner': 'inset -4px -4px 0px 0px rgba(0,0,0,0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #2D1B4E;
+            background-image: 
+                radial-gradient(#4B3F72 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #FFF9E1;
+            image-rendering: pixelated;
+        }
+
+        .pixel-border {
+            border: 4px solid #000;
+            position: relative;
+        }
+
+        .pixel-card {
+            background: #FFF9E1;
+            color: #2D1B4E;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0px #000;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pixel-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 10px 10px 0px #000;
+        }
+
+        .pixel-btn {
+            background: #FF6B6B;
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            padding: 8px 16px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .pixel-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #000;
+        }
+
+        .pixel-heading {
+            text-shadow: 4px 4px 0px #000;
+        }
+
+        .glass-nav {
+            background: rgba(45, 27, 78, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 4px solid #000;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 12px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2D1B4E;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #FFD700;
+            border: 3px solid #000;
+        }
+    </style>
+</head>
+<body class="font-body custom-scrollbar">
+    <div class="scanline"></div>
+
+    <!-- Navigation -->
+    <nav class="glass-nav sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-pixel-accent border-2 border-black flex items-center justify-center text-black font-pixel text-xs shadow-pixel">
+                    🐶
+                </div>
+                <span class="font-pixel text-xs hidden sm:block tracking-tighter">B11208040 // DOGE_LOG</span>
+            </div>
+            <div class="flex gap-4">
+                <div class="pixel-btn text-xs font-pixel text-white">HOME</div>
+                <div class="pixel-btn text-xs font-pixel text-white bg-pixel-mint">SHARE</div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <!-- Banner Section -->
+        <div class="relative mb-16">
+            <div class="pixel-border overflow-hidden rounded-sm shadow-pixel floating bg-black">
+                <img src='https://opal.google/board/blobs/32d3fcf5-5f68-433e-b2fc-37a579050a9f' alt='汪星人全攻略' class="w-full h-auto block opacity-90 hover:opacity-100 transition-opacity" />
+                <div class="absolute inset-0 pointer-events-none border-[12px] border-double border-white/10"></div>
+            </div>
+            <div class="absolute -bottom-6 -right-4 bg-pixel-accent text-black px-6 py-4 border-4 border-black shadow-pixel rotate-2 font-pixel text-sm">
+                INSERT COIN
+            </div>
+        </div>
+
+        <!-- Article Header -->
+        <header class="text-center mb-16 space-y-6">
+            <div class="inline-block bg-pixel-pink px-4 py-1 border-2 border-black text-white font-pixel text-[10px] mb-2 shadow-pixel">
+                EVOLUTION & CULTURE
+            </div>
+            <h1 class="text-4xl md:text-6xl font-display leading-tight pixel-heading text-pixel-accent">
+                【汪星人全攻略】<br>從荒野之狼到沙發霸主
+            </h1>
+            <p class="text-xl text-pixel-mint font-pixel text-[12px] tracking-widest opacity-80 uppercase">
+                人類最好朋友的大小事
+            </p>
+        </header>
+
+        <!-- Main Content Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Left Sidebar / Intro -->
+            <div class="lg:col-span-4 space-y-8">
+                <div class="pixel-card p-6 rotate-[-1deg]">
+                    <div class="w-12 h-12 bg-pixel-base rounded-full border-2 border-black mb-4 flex items-center justify-center text-2xl">
+                        🐾
+                    </div>
+                    <p class="italic leading-relaxed">
+                        「人類與狗的關係，無疑是地球生物史上最成功的一場『跨物種合夥案』。」
+                    </p>
+                </div>
+
+                <div class="pixel-border bg-pixel-surface p-6 text-white text-sm">
+                    <h3 class="font-pixel text-[10px] mb-4 text-pixel-accent">ARCHIVE_INFO</h3>
+                    <ul class="space-y-3 font-pixel text-[8px] leading-relaxed opacity-80">
+                        <li>> SUBJECT: Canis lupus familiaris</li>
+                        <li>> STATUS: Domesticated</li>
+                        <li>> TIMELINE: 30,000 Years</li>
+                        <li>> AUTHOR: B11208040</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Article Body -->
+            <div class="lg:col-span-8 space-y-12">
+                
+                <!-- Section 1 -->
+                <section class="space-y-6">
+                    <h2 class="text-3xl font-display text-pixel-pink border-l-8 border-pixel-pink pl-4">
+                        一、 汪星人基本資料卡
+                    </h2>
+                    <div class="bg-white/5 p-8 rounded-lg border-2 border-white/10 backdrop-blur-sm space-y-6 text-lg leading-relaxed">
+                        <p>我們常說狗狗是「人類最好的朋友」，但從遺傳學上來看，牠們其實是灰狼的亞種。想像一下，你家那隻對著吸塵器狂吠的吉娃娃，基因深處竟然潛藏著狼的殘影。</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="pixel-card p-4 bg-pixel-mint/10 border-pixel-mint text-white">
+                                <span class="block font-pixel text-[10px] text-pixel-mint mb-2">SENSORY++</span>
+                                嗅覺靈敏度是人類的十萬倍，世界是由「氣味分子」構成的交響樂。
+                            </div>
+                            <div class="pixel-card p-4 bg-pixel-pink/10 border-pixel-pink text-white">
+                                <span class="block font-pixel text-[10px] text-pixel-pink mb-2">LOVE_CHEMISTRY</span>
+                                當與狗狗對望時，大腦會分泌「催產素」（Oxytocin），建立生物情感契約。
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Bento Style -->
+                <section class="space-y-6">
+                    <h2 class="text-3xl font-display text-pixel-accent border-l-8 border-pixel-accent pl-4">
+                        二、 穿越時空 30,000 年
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="pixel-card p-6 md:col-span-2">
+                            <h4 class="font-bold text-xl mb-2">從「狩獵隊友」到「營地保安」</h4>
+                            <p>早期的狼群中，有些膽子較大、侵略性較低的個體開始在人類營地周圍覓食。完成了一場自發性的「自我馴化」。</p>
+                        </div>
+                        <div class="pixel-card p-6 bg-pixel-mint">
+                            <h4 class="font-bold text-lg mb-2">古埃及守護者</h4>
+                            <p class="text-sm">與冥界之神阿努比斯掛鉤，象徵靈魂的指引。</p>
+                        </div>
+                        <div class="pixel-card p-6 bg-pixel-accent">
+                            <h4 class="font-bold text-lg mb-2">中世紀階級</h4>
+                            <p class="text-sm">貴族身邊是高貴獵犬，平民家中則是全能助手。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3 -->
+                <section class="space-y-6">
+                    <h2 class="text-3xl font-display text-pixel-mint border-l-8 border-pixel-mint pl-4">
+                        三、 現代狗狗的生活態度
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start bg-pixel-surface p-6 border-2 border-black shadow-pixel">
+                            <div class="text-4xl">💰</div>
+                            <div>
+                                <h3 class="font-bold text-xl text-pixel-accent">「毛經濟」的崛起</h3>
+                                <p class="text-gray-300">從營養師配比的高端生食，到專屬的醫美抗老沙龍，反映了現代人的情感寄託。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start bg-pixel-surface p-6 border-2 border-black shadow-pixel translate-x-2">
+                            <div class="text-4xl">🐕‍🦺</div>
+                            <div>
+                                <h3 class="font-bold text-xl text-pixel-pink">專業斜槓汪</h3>
+                                <p class="text-gray-300">針對自閉症、PTSD 的心理輔助犬，成了人類心靈的修復師。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Ethical Discussion -->
+                <section class="space-y-6">
+                    <h2 class="text-3xl font-display text-pixel-pink border-l-8 border-pixel-pink pl-4">
+                        四、 搖尾巴背後的難題
+                    </h2>
+                    <div class="bg-pixel-cream text-pixel-base p-8 border-4 border-black shadow-pixel space-y-6">
+                        <div class="border-b-2 border-black/10 pb-4">
+                            <h4 class="font-bold text-xl mb-1">品種的原罪與偏見</h4>
+                            <p>針對特定犬種的禁令（BSL）始終爭議不斷。是天性使然，還是飼養教育的缺失？</p>
+                        </div>
+                        <div class="border-b-2 border-black/10 pb-4">
+                            <h4 class="font-bold text-xl mb-1">零撲殺的沉重代價</h4>
+                            <p>如何在「愛心」與「理性管理」間找到平衡，是現代文明的一大挑戰。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-1">審美帶來的痛楚</h4>
+                            <p>法鬥的扁臉、柯基的長背——這些為了人類審美而造成的遺傳缺陷，是我們必須面對的育種倫理。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5 -->
+                <section class="space-y-6 pb-20">
+                    <h2 class="text-3xl font-display text-pixel-accent border-l-8 border-pixel-accent pl-4">
+                        五、 未來汪星人
+                    </h2>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="pixel-border p-6 bg-gradient-to-br from-indigo-900 to-purple-900">
+                            <h3 class="font-pixel text-xs text-pixel-mint mb-4 uppercase">Cyber-Doge Technology</h3>
+                            <div class="space-y-4">
+                                <p class="text-lg italic">「智慧項圈與 AI 監控讓我們即使不在家，也能掌握狗狗的情緒與健康指標。」</p>
+                                <div class="h-1 w-full bg-pixel-base overflow-hidden">
+                                    <div class="h-full bg-pixel-accent w-2/3 animate-[pulse_2s_infinite]"></div>
+                                </div>
+                                <p class="text-sm text-gray-400">目前科學界正針對狗狗開發延緩衰老的臨床藥物，讓陪伴的時光不再因衰老而苦澀。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <footer class="mt-12 mb-24 relative">
+            <div class="pixel-card p-12 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-pixel-pink"></div>
+                <h2 class="text-4xl font-display mb-6">結語</h2>
+                <p class="text-xl leading-relaxed max-w-2xl mx-auto">
+                    當你下次撫摸手邊的那顆毛腦袋時，別忘了，你手掌觸碰的，是三萬年演化洗禮後的輝煌成果。理解、尊重，並回報這份毫無保留的愛。
+                </p>
+                <div class="mt-10">
+                    <div class="pixel-btn font-pixel text-xs text-white bg-pixel-base px-8 py-4">
+                        MISSION COMPLETE
+                    </div>
+                </div>
+                <!-- Pixel dog icon animation -->
+                <div class="mt-8 text-5xl floating">🐕</div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Floating Decor Elements -->
+    <div class="fixed bottom-8 left-8 pointer-events-none opacity-40 hidden md:block">
+        <div class="pixel-border p-2 bg-pixel-mint text-black font-pixel text-[8px]">
+            HEALTH: [||||||||--]
+        </div>
+    </div>
+    <div class="fixed top-24 right-8 pointer-events-none opacity-40 hidden md:block">
+        <div class="pixel-border p-2 bg-pixel-pink text-white font-pixel text-[8px]">
+            LVL: 99 HAPPY BOY
+        </div>
+    </div>
+
+    <script>
+        // Smooth hover sound effect simulation could go here
+        console.log("Pixel Blog Loaded - Author: B11208040");
+    </script>
+</body>
+</html>
