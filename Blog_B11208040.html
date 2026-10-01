@@ -1,347 +1,922 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>汪星人全攻略 - 像素可愛部落格</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+TC:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        pixel: {
-                            base: '#2D1B4E',
-                            surface: '#4B3F72',
-                            accent: '#FFD700',
-                            pink: '#FF6B6B',
-                            mint: '#1DE9B6',
-                            cream: '#FFF9E1'
-                        }
-                    },
-                    fontFamily: {
-                        pixel: ['"Press Start 2P"', 'cursive'],
-                        display: ['"ZCOOL KuaiLe"', 'cursive'],
-                        body: ['"Noto Sans TC"', 'sans-serif']
-                    },
-                    boxShadow: {
-                        'pixel': '4px 4px 0px 0px rgba(0,0,0,1)',
-                        'pixel-hover': '6px 6px 0px 0px rgba(0,0,0,1)',
-                        'pixel-inner': 'inset -4px -4px 0px 0px rgba(0,0,0,0.2)',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #2D1B4E;
-            background-image: 
-                radial-gradient(#4B3F72 1px, transparent 1px);
-            background-size: 20px 20px;
-            color: #FFF9E1;
-            image-rendering: pixelated;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusGo Week03 Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M16 40h32M20 40V25c0-5 4-9 9-9h6c5 0 9 4 9 9v15M24 31h16' stroke='white' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='24' cy='47' r='4' fill='%23facc15'/%3E%3Ccircle cx='40' cy='47' r='4' fill='%23facc15'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f5f7f8;
+      --panel: #ffffff;
+      --ink: #17201d;
+      --muted: #66736f;
+      --line: #d9e0de;
+      --teal: #0f766e;
+      --teal-2: #14b8a6;
+      --amber: #d97706;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --green: #15803d;
+      --shadow: 0 12px 30px rgba(15, 23, 42, .08);
+    }
 
-        .pixel-border {
-            border: 4px solid #000;
-            position: relative;
-        }
+    * { box-sizing: border-box; }
 
-        .pixel-card {
-            background: #FFF9E1;
-            color: #2D1B4E;
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0px #000;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft JhengHei", "Noto Sans TC", "Segoe UI", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
 
-        .pixel-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 10px 10px 0px #000;
-        }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 247, 248, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
 
-        .pixel-btn {
-            background: #FF6B6B;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0px #000;
-            padding: 8px 16px;
-            display: inline-block;
-            cursor: pointer;
-            transition: all 0.1s;
-        }
+    .shell {
+      width: min(1440px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
 
-        .pixel-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px #000;
-        }
+    .topbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-        .pixel-heading {
-            text-shadow: 4px 4px 0px #000;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 280px;
+    }
 
-        .glass-nav {
-            background: rgba(45, 27, 78, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 4px solid #000;
-        }
+    .mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--teal);
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
 
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
+    h1 {
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
 
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
+    .subhead {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
 
-        .scanline {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            animation: scanline 8s linear infinite;
-            z-index: 9999;
-        }
+    nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
 
-        @keyframes scanline {
-            0% { top: 0; }
-            100% { top: 100%; }
-        }
+    nav a {
+      color: #23302c;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .9rem;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
 
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 12px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #2D1B4E;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #FFD700;
-            border: 3px solid #000;
-        }
-    </style>
+    nav a:hover,
+    nav a:focus {
+      border-color: var(--line);
+      background: white;
+      outline: none;
+    }
+
+    main {
+      padding: 24px 0 42px;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .overview {
+      grid-template-columns: minmax(280px, 1.15fr) minmax(320px, 1.85fr);
+      align-items: stretch;
+    }
+
+    .metric-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel,
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    .metric {
+      padding: 16px;
+      min-height: 126px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .metric-value {
+      font-size: clamp(1.45rem, 2vw, 2.15rem);
+      font-weight: 850;
+      letter-spacing: 0;
+      margin: 10px 0 4px;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .context {
+      margin: 0;
+      color: var(--muted);
+      max-width: 780px;
+      font-size: .95rem;
+    }
+
+    .decision {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      background: #0f2f2b;
+      color: white;
+      border-color: #0f2f2b;
+    }
+
+    .decision h2 {
+      font-size: 1.65rem;
+    }
+
+    .decision p {
+      color: #d9fffa;
+      margin: 10px 0 0;
+    }
+
+    .verdict {
+      margin-top: auto;
+      padding-top: 22px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 800;
+      background: #e8f3f1;
+      color: #0f514b;
+      border: 1px solid #c7e6df;
+    }
+
+    .decision .badge {
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+      border-color: rgba(255, 255, 255, .24);
+    }
+
+    .risk { color: var(--red); }
+    .ok { color: var(--green); }
+    .warn { color: var(--amber); }
+    .info { color: var(--blue); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .92rem;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #3a4945;
+      background: #f2f6f5;
+      font-size: .82rem;
+      text-transform: none;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .number {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .chart-wrap {
+      min-height: 280px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 280px;
+      display: block;
+    }
+
+    .bars {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 96px minmax(100px, 1fr) 104px;
+      gap: 12px;
+      align-items: center;
+      font-size: .9rem;
+    }
+
+    .track {
+      height: 12px;
+      border-radius: 999px;
+      background: #e5ecea;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--teal);
+    }
+
+    .scenario {
+      border-left: 5px solid var(--teal);
+    }
+
+    .scenario h3,
+    .panel h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .scenario strong {
+      display: block;
+      font-size: 1.55rem;
+      margin: 8px 0;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .list li {
+      margin: 6px 0;
+    }
+
+    .source-line {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .heat {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .heat-cell {
+      min-height: 92px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .heat-cell b {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .heat-cell span {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .high { border-color: #fecaca; background: #fff1f2; }
+    .medium { border-color: #fde68a; background: #fffbeb; }
+    .low { border-color: #bbf7d0; background: #f0fdf4; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 20px 0 34px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    @media (max-width: 980px) {
+      .topbar { align-items: flex-start; flex-direction: column; padding: 12px 0; }
+      .overview, .two, .three { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .heat { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100vw - 20px, 1440px); }
+      .metric-grid { grid-template-columns: 1fr; }
+      .section-title { align-items: flex-start; flex-direction: column; }
+      .bar-row { grid-template-columns: 1fr; gap: 6px; }
+      .heat { grid-template-columns: 1fr; }
+      th, td { padding: 9px 7px; font-size: .86rem; }
+    }
+  </style>
 </head>
-<body class="font-body custom-scrollbar">
-    <div class="scanline"></div>
-
-    <!-- Navigation -->
-    <nav class="glass-nav sticky top-0 z-50 px-4 py-3">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-pixel-accent border-2 border-black flex items-center justify-center text-black font-pixel text-xs shadow-pixel">
-                    🐶
-                </div>
-                <span class="font-pixel text-xs hidden sm:block tracking-tighter">B11208040 // DOGE_LOG</span>
-            </div>
-            <div class="flex gap-4">
-                <div class="pixel-btn text-xs font-pixel text-white">HOME</div>
-                <div class="pixel-btn text-xs font-pixel text-white bg-pixel-mint">SHARE</div>
-            </div>
+<body>
+  <header>
+    <div class="shell topbar">
+      <div class="brand">
+        <div class="mark">CG</div>
+        <div>
+          <h1>CampusGo Week03 商業分析儀表板</h1>
+          <div class="subhead">2025 歷年資料、2026 Q1 最新基準、Q2 企業團膳試辦 ROI</div>
         </div>
-    </nav>
-
-    <main class="max-w-5xl mx-auto px-4 py-12">
-        <!-- Banner Section -->
-        <div class="relative mb-16">
-            <div class="pixel-border overflow-hidden rounded-sm shadow-pixel floating bg-black">
-                <img src='https://opal.google/board/blobs/32d3fcf5-5f68-433e-b2fc-37a579050a9f' alt='汪星人全攻略' class="w-full h-auto block opacity-90 hover:opacity-100 transition-opacity" />
-                <div class="absolute inset-0 pointer-events-none border-[12px] border-double border-white/10"></div>
-            </div>
-            <div class="absolute -bottom-6 -right-4 bg-pixel-accent text-black px-6 py-4 border-4 border-black shadow-pixel rotate-2 font-pixel text-sm">
-                INSERT COIN
-            </div>
-        </div>
-
-        <!-- Article Header -->
-        <header class="text-center mb-16 space-y-6">
-            <div class="inline-block bg-pixel-pink px-4 py-1 border-2 border-black text-white font-pixel text-[10px] mb-2 shadow-pixel">
-                EVOLUTION & CULTURE
-            </div>
-            <h1 class="text-4xl md:text-6xl font-display leading-tight pixel-heading text-pixel-accent">
-                【汪星人全攻略】<br>從荒野之狼到沙發霸主
-            </h1>
-            <p class="text-xl text-pixel-mint font-pixel text-[12px] tracking-widest opacity-80 uppercase">
-                人類最好朋友的大小事
-            </p>
-        </header>
-
-        <!-- Main Content Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
-            <!-- Left Sidebar / Intro -->
-            <div class="lg:col-span-4 space-y-8">
-                <div class="pixel-card p-6 rotate-[-1deg]">
-                    <div class="w-12 h-12 bg-pixel-base rounded-full border-2 border-black mb-4 flex items-center justify-center text-2xl">
-                        🐾
-                    </div>
-                    <p class="italic leading-relaxed">
-                        「人類與狗的關係，無疑是地球生物史上最成功的一場『跨物種合夥案』。」
-                    </p>
-                </div>
-
-                <div class="pixel-border bg-pixel-surface p-6 text-white text-sm">
-                    <h3 class="font-pixel text-[10px] mb-4 text-pixel-accent">ARCHIVE_INFO</h3>
-                    <ul class="space-y-3 font-pixel text-[8px] leading-relaxed opacity-80">
-                        <li>> SUBJECT: Canis lupus familiaris</li>
-                        <li>> STATUS: Domesticated</li>
-                        <li>> TIMELINE: 30,000 Years</li>
-                        <li>> AUTHOR: B11208040</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Main Article Body -->
-            <div class="lg:col-span-8 space-y-12">
-                
-                <!-- Section 1 -->
-                <section class="space-y-6">
-                    <h2 class="text-3xl font-display text-pixel-pink border-l-8 border-pixel-pink pl-4">
-                        一、 汪星人基本資料卡
-                    </h2>
-                    <div class="bg-white/5 p-8 rounded-lg border-2 border-white/10 backdrop-blur-sm space-y-6 text-lg leading-relaxed">
-                        <p>我們常說狗狗是「人類最好的朋友」，但從遺傳學上來看，牠們其實是灰狼的亞種。想像一下，你家那隻對著吸塵器狂吠的吉娃娃，基因深處竟然潛藏著狼的殘影。</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="pixel-card p-4 bg-pixel-mint/10 border-pixel-mint text-white">
-                                <span class="block font-pixel text-[10px] text-pixel-mint mb-2">SENSORY++</span>
-                                嗅覺靈敏度是人類的十萬倍，世界是由「氣味分子」構成的交響樂。
-                            </div>
-                            <div class="pixel-card p-4 bg-pixel-pink/10 border-pixel-pink text-white">
-                                <span class="block font-pixel text-[10px] text-pixel-pink mb-2">LOVE_CHEMISTRY</span>
-                                當與狗狗對望時，大腦會分泌「催產素」（Oxytocin），建立生物情感契約。
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section 2: Bento Style -->
-                <section class="space-y-6">
-                    <h2 class="text-3xl font-display text-pixel-accent border-l-8 border-pixel-accent pl-4">
-                        二、 穿越時空 30,000 年
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="pixel-card p-6 md:col-span-2">
-                            <h4 class="font-bold text-xl mb-2">從「狩獵隊友」到「營地保安」</h4>
-                            <p>早期的狼群中，有些膽子較大、侵略性較低的個體開始在人類營地周圍覓食。完成了一場自發性的「自我馴化」。</p>
-                        </div>
-                        <div class="pixel-card p-6 bg-pixel-mint">
-                            <h4 class="font-bold text-lg mb-2">古埃及守護者</h4>
-                            <p class="text-sm">與冥界之神阿努比斯掛鉤，象徵靈魂的指引。</p>
-                        </div>
-                        <div class="pixel-card p-6 bg-pixel-accent">
-                            <h4 class="font-bold text-lg mb-2">中世紀階級</h4>
-                            <p class="text-sm">貴族身邊是高貴獵犬，平民家中則是全能助手。</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section 3 -->
-                <section class="space-y-6">
-                    <h2 class="text-3xl font-display text-pixel-mint border-l-8 border-pixel-mint pl-4">
-                        三、 現代狗狗的生活態度
-                    </h2>
-                    <div class="space-y-4">
-                        <div class="flex gap-4 items-start bg-pixel-surface p-6 border-2 border-black shadow-pixel">
-                            <div class="text-4xl">💰</div>
-                            <div>
-                                <h3 class="font-bold text-xl text-pixel-accent">「毛經濟」的崛起</h3>
-                                <p class="text-gray-300">從營養師配比的高端生食，到專屬的醫美抗老沙龍，反映了現代人的情感寄託。</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start bg-pixel-surface p-6 border-2 border-black shadow-pixel translate-x-2">
-                            <div class="text-4xl">🐕‍🦺</div>
-                            <div>
-                                <h3 class="font-bold text-xl text-pixel-pink">專業斜槓汪</h3>
-                                <p class="text-gray-300">針對自閉症、PTSD 的心理輔助犬，成了人類心靈的修復師。</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section 4: Ethical Discussion -->
-                <section class="space-y-6">
-                    <h2 class="text-3xl font-display text-pixel-pink border-l-8 border-pixel-pink pl-4">
-                        四、 搖尾巴背後的難題
-                    </h2>
-                    <div class="bg-pixel-cream text-pixel-base p-8 border-4 border-black shadow-pixel space-y-6">
-                        <div class="border-b-2 border-black/10 pb-4">
-                            <h4 class="font-bold text-xl mb-1">品種的原罪與偏見</h4>
-                            <p>針對特定犬種的禁令（BSL）始終爭議不斷。是天性使然，還是飼養教育的缺失？</p>
-                        </div>
-                        <div class="border-b-2 border-black/10 pb-4">
-                            <h4 class="font-bold text-xl mb-1">零撲殺的沉重代價</h4>
-                            <p>如何在「愛心」與「理性管理」間找到平衡，是現代文明的一大挑戰。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-xl mb-1">審美帶來的痛楚</h4>
-                            <p>法鬥的扁臉、柯基的長背——這些為了人類審美而造成的遺傳缺陷，是我們必須面對的育種倫理。</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section 5 -->
-                <section class="space-y-6 pb-20">
-                    <h2 class="text-3xl font-display text-pixel-accent border-l-8 border-pixel-accent pl-4">
-                        五、 未來汪星人
-                    </h2>
-                    <div class="grid grid-cols-1 gap-6">
-                        <div class="pixel-border p-6 bg-gradient-to-br from-indigo-900 to-purple-900">
-                            <h3 class="font-pixel text-xs text-pixel-mint mb-4 uppercase">Cyber-Doge Technology</h3>
-                            <div class="space-y-4">
-                                <p class="text-lg italic">「智慧項圈與 AI 監控讓我們即使不在家，也能掌握狗狗的情緒與健康指標。」</p>
-                                <div class="h-1 w-full bg-pixel-base overflow-hidden">
-                                    <div class="h-full bg-pixel-accent w-2/3 animate-[pulse_2s_infinite]"></div>
-                                </div>
-                                <p class="text-sm text-gray-400">目前科學界正針對狗狗開發延緩衰老的臨床藥物，讓陪伴的時光不再因衰老而苦澀。</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-        </div>
-
-        <!-- Conclusion -->
-        <footer class="mt-12 mb-24 relative">
-            <div class="pixel-card p-12 text-center relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-pixel-pink"></div>
-                <h2 class="text-4xl font-display mb-6">結語</h2>
-                <p class="text-xl leading-relaxed max-w-2xl mx-auto">
-                    當你下次撫摸手邊的那顆毛腦袋時，別忘了，你手掌觸碰的，是三萬年演化洗禮後的輝煌成果。理解、尊重，並回報這份毫無保留的愛。
-                </p>
-                <div class="mt-10">
-                    <div class="pixel-btn font-pixel text-xs text-white bg-pixel-base px-8 py-4">
-                        MISSION COMPLETE
-                    </div>
-                </div>
-                <!-- Pixel dog icon animation -->
-                <div class="mt-8 text-5xl floating">🐕</div>
-            </div>
-        </footer>
-    </main>
-
-    <!-- Floating Decor Elements -->
-    <div class="fixed bottom-8 left-8 pointer-events-none opacity-40 hidden md:block">
-        <div class="pixel-border p-2 bg-pixel-mint text-black font-pixel text-[8px]">
-            HEALTH: [||||||||--]
-        </div>
+      </div>
+      <nav aria-label="Dashboard sections">
+        <a href="#overview">總覽</a>
+        <a href="#operations">營運基準</a>
+        <a href="#market">市場規模</a>
+        <a href="#roi">ROI</a>
+        <a href="#risk">風險與證據</a>
+        <a href="#recommendation">建議</a>
+      </nav>
     </div>
-    <div class="fixed top-24 right-8 pointer-events-none opacity-40 hidden md:block">
-        <div class="pixel-border p-2 bg-pixel-pink text-white font-pixel text-[8px]">
-            LVL: 99 HAPPY BOY
-        </div>
-    </div>
+  </header>
 
-    <script>
-        // Smooth hover sound effect simulation could go here
-        console.log("Pixel Blog Loaded - Author: B11208040");
-    </script>
+  <main class="shell">
+    <section id="overview" class="grid overview">
+      <article class="panel decision">
+        <div>
+          <div class="badge-row">
+            <span class="badge">CONDITIONAL GO</span>
+            <span class="badge">8 週試辦</span>
+            <span class="badge">預算 600,000 元</span>
+          </div>
+          <h2>可做受控試辦，不建議期待 8 週回本</h2>
+          <p>2025 年校園午餐需求穩定，2026 Q1 仍維持每月 18,000 筆訂單；但準時率、異常率與客訴 SLA 顯示 Q2 企業團膳導入前仍需驗證履約能力、客服承諾與單位經濟。</p>
+        </div>
+        <div class="verdict">
+          <div class="badge-row">
+            <span class="badge">建議 3-6 家企業</span>
+            <span class="badge">每週 1-2 次</span>
+            <span class="badge">960-7,200 份餐</span>
+          </div>
+          <p>60 萬元應定位為 Q2 驗證投資，核心成果是取得企業採用、準時率、異常率、客訴 SLA、單位經濟與治理資料。</p>
+        </div>
+      </article>
+
+      <div class="grid metric-grid">
+        <div class="metric">
+          <div class="metric-label">2025 全年 GMV</div>
+          <div class="metric-value">70.1M</div>
+          <div class="metric-note">248,500 筆訂單</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">2026 Q1 GMV</div>
+          <div class="metric-value">7.83M</div>
+          <div class="metric-note">54,000 筆訂單</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Q1 午餐每份 GMV</div>
+          <div class="metric-value">95.89</div>
+          <div class="metric-note">Q2 試辦估算客單</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Q1 準時率</div>
+          <div class="metric-value risk">70.08%</div>
+          <div class="metric-note">企業服務需明顯改善</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Q1 午餐週量</div>
+          <div class="metric-value">4,047</div>
+          <div class="metric-note">52,613 份 / 13 週</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Q1 異常率</div>
+          <div class="metric-value risk">32.62%</div>
+          <div class="metric-note">導入前需下降</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">客訴 SLA 達成率</div>
+          <div class="metric-value risk">40.83%</div>
+          <div class="metric-note">2026 1-4 月已結案</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Q2 基準 SOM</div>
+          <div class="metric-value">690K</div>
+          <div class="metric-note">8 週 GMV 估算</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="operations">
+      <div class="section-title">
+        <div>
+          <h2>2025 歷年與 2026 Q1 營運基準</h2>
+          <p class="context">根據 2025 四季訂單與 2026 Q1 訂單 CSV 匯總。2026 Q1 是 Q2 試辦前最新基準，優先用於市場規模與 ROI 情境。</p>
+        </div>
+      </div>
+      <div class="grid two">
+        <article class="panel chart-wrap">
+          <h3>GMV 與訂單量</h3>
+          <canvas id="quarterChart" aria-label="季度 GMV 與訂單量圖表"></canvas>
+        </article>
+        <article class="panel chart-wrap">
+          <h3>履約品質</h3>
+          <canvas id="qualityChart" aria-label="準時率與異常率圖表"></canvas>
+        </article>
+      </div>
+      <div class="panel" style="margin-top:16px; overflow:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>期間</th>
+              <th class="number">訂單數</th>
+              <th class="number">GMV</th>
+              <th class="number">平均每筆 GMV</th>
+              <th class="number">準時率</th>
+              <th class="number">異常率</th>
+              <th class="number">午餐占比</th>
+            </tr>
+          </thead>
+          <tbody id="quarterTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="market">
+      <div class="section-title">
+        <div>
+          <h2>市場規模估算</h2>
+          <p class="context">依 `market_sizing_guide.md` 使用 bottom-up：企業數 x 每家可服務員工 x 每週訂餐次數 x 每份餐金額 x 50 週。Q2 試辦採 2026 Q1 午餐每份 95.89 元作為保守客單。</p>
+        </div>
+      </div>
+      <div class="grid three" id="samCards"></div>
+      <div class="grid two" style="margin-top:16px;">
+        <article class="panel chart-wrap">
+          <h3>SAM 年 GMV 情境</h3>
+          <canvas id="samChart" aria-label="SAM 市場規模情境圖表"></canvas>
+        </article>
+        <article class="panel">
+          <h3>8 週 SOM 試辦規模</h3>
+          <div class="bars" id="somBars"></div>
+          <p class="source-line">基準情境每週 900 份，約為 2026 Q1 午餐週量 4,047 份的 22.24%。樂觀情境接近現有午餐週量上限。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="roi">
+      <div class="section-title">
+        <div>
+          <h2>8 週試辦 ROI</h2>
+          <p class="context">平台收入率與每份變動成本尚未由資料驗證，因此以保守、基準、樂觀三個情境呈現。新版使用 2026 Q1 午餐客單估算 Q2 試辦。</p>
+        </div>
+      </div>
+      <div class="grid two">
+        <article class="panel chart-wrap">
+          <h3>扣除 600,000 元後 ROI</h3>
+          <canvas id="roiChart" aria-label="ROI 情境圖表"></canvas>
+        </article>
+        <article class="panel" style="overflow:auto;">
+          <h3>投資報酬情境</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>情境</th>
+                <th class="number">8 週 GMV</th>
+                <th class="number">平台收入</th>
+                <th class="number">變動成本</th>
+                <th class="number">試辦貢獻</th>
+                <th class="number">ROI</th>
+              </tr>
+            </thead>
+            <tbody id="roiTable"></tbody>
+          </table>
+        </article>
+      </div>
+    </section>
+
+    <section id="risk">
+      <div class="section-title">
+        <div>
+          <h2>風險、假設與證據狀態</h2>
+          <p class="context">企業團膳決策不能只看 GMV。2026 客訴資料顯示 DELIVERY、ORDER_ACCURACY、PAYMENT 與 SLA 是 Q2 試辦前最需要處理的風險。</p>
+        </div>
+      </div>
+      <div class="grid two">
+        <article class="panel">
+          <h3>高影響假設</h3>
+          <div class="heat" id="assumptionHeat"></div>
+        </article>
+        <article class="panel">
+          <h3>競爭與替代方案</h3>
+          <div class="bars" id="competitorBars"></div>
+        </article>
+      </div>
+      <div class="grid two" style="margin-top:16px;">
+        <article class="panel">
+          <h3>訪談痛點主題</h3>
+          <div class="bars" id="painBars"></div>
+        </article>
+        <article class="panel">
+          <h3>2026 客訴風險</h3>
+          <div class="bars" id="complaintBars"></div>
+        </article>
+      </div>
+      <div class="grid two" style="margin-top:16px;">
+        <article class="panel">
+          <h3>證據分類提醒</h3>
+          <ul class="list">
+            <li><b>FACT：</b>86 家店、600,000 元預算、8 週試辦、2025 四季訂單、2026 Q1 訂單與 2026 客訴彙總。</li>
+            <li><b>DERIVED：</b>GMV、午餐每份餐金額、客訴率、市場規模與 ROI 情境。</li>
+            <li><b>ASSUMPTION：</b>企業願付、餐廳產能、企業數、平台收入率。</li>
+            <li><b>UNKNOWN：</b>真實市場規模、法規要求、保險、稅務、單筆完整成本。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>服務品質基準</h3>
+          <ul class="list">
+            <li>2026 Q1 準時率為 70.08%，企業試辦需設定更高門檻。</li>
+            <li>2026 Q1 異常率為 32.62%，不宜直接承諾高 SLA。</li>
+            <li>2026 1-4 月已結案客訴 SLA 達成率為 40.83%。</li>
+            <li>DELIVERY 與 ORDER_ACCURACY 是 Q2 試辦前的優先改善項。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="recommendation">
+      <div class="section-title">
+        <div>
+          <h2>管理建議</h2>
+          <p class="context">建議以「能否取得擴大投資證據」評估試辦，而不是用 8 週財務回本作為唯一標準。</p>
+        </div>
+      </div>
+      <div class="grid three">
+        <article class="panel scenario">
+          <h3>試辦規模</h3>
+          <strong>3-6 家企業</strong>
+          <p>每家 40-75 名參與員工，每週 1-2 次，控制在 960-7,200 份餐。</p>
+        </article>
+        <article class="panel scenario">
+          <h3>通過條件</h3>
+          <strong>改善履約</strong>
+          <p>準時率要明顯高於 2026 Q1 的 70.08%，異常率要明顯低於 32.62%，客訴 SLA 也要高於現況 40.83%。</p>
+        </article>
+        <article class="panel scenario">
+          <h3>停止條件</h3>
+          <strong>成本或風險失控</strong>
+          <p>若單筆貢獻無改善、企業不續用，或個資食安稅務保險無法文件化，停止擴張。</p>
+        </article>
+      </div>
+      <div class="panel" style="margin-top:16px;">
+        <h3>最終判斷</h3>
+        <p>CampusGo 可以在 2026 Q2 投入 600,000 元做受控試辦，但短期 ROI 大機率為負。若 8 週後能證明企業願意續用、履約品質改善、客訴 SLA 改善、餐廳可支援午餐尖峰、單位經濟有正向路徑，才建議擴大企業團膳。否則應暫停或重新設計商業模式。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">資料來源：Week03 教材包、2025 Q1-Q4 訂單 CSV、2026 Q1 訂單 CSV、2026 1-4 月客訴 CSV、operating_baseline、competitor_alternatives、interview_responses、pilot_assumptions、pilot_metric_template、unit_economics_template、evidence_evaluation_cases。所有資料為課堂模擬資料。</div>
+  </footer>
+
+  <script>
+    const quarters = [
+      { q: "2025 Q1", orders: 56900, gmv: 16041291, avg: 281.92, onTime: 70.09, issue: 33.08, lunch: 61.90 },
+      { q: "2025 Q2", orders: 63500, gmv: 17876945, avg: 281.53, onTime: 69.94, issue: 33.17, lunch: 61.71 },
+      { q: "2025 Q3", orders: 57500, gmv: 16230456, avg: 282.27, onTime: 69.66, issue: 33.30, lunch: 62.06 },
+      { q: "2025 Q4", orders: 70600, gmv: 19957166, avg: 282.68, onTime: 70.14, issue: 32.96, lunch: 61.96 },
+      { q: "2026 Q1", orders: 54000, gmv: 7830000, avg: 145.00, onTime: 70.08, issue: 32.62, lunch: 64.45 }
+    ];
+
+    const sam = [
+      { name: "保守", firms: 50, employees: 60, freq: 1, annualGmv: 14383500, status: "ASSUMPTION" },
+      { name: "基準", firms: 100, employees: 100, freq: 2, annualGmv: 95890000, status: "ASSUMPTION" },
+      { name: "樂觀", firms: 200, employees: 150, freq: 3, annualGmv: 431505000, status: "ASSUMPTION" }
+    ];
+
+    const som = [
+      { name: "保守", meals: 960, gmv: 92054, weeklyMeals: 120, share: 2.97 },
+      { name: "基準", meals: 7200, gmv: 690408, weeklyMeals: 900, share: 22.24 },
+      { name: "樂觀", meals: 28800, gmv: 2761632, weeklyMeals: 3600, share: 88.95 }
+    ];
+
+    const roi = [
+      { name: "保守", gmv: 92054, revenueRate: 12, revenue: 11047, variableCost: 19200, contribution: -8153, roi: -101.4 },
+      { name: "基準", gmv: 690408, revenueRate: 15, revenue: 103561, variableCost: 108000, contribution: -4439, roi: -100.7 },
+      { name: "樂觀", gmv: 2761632, revenueRate: 18, revenue: 497094, variableCost: 345600, contribution: 151494, roi: -74.8 }
+    ];
+
+    const assumptions = [
+      ["企業行政願意嘗試集中訂餐", "customer", "high"],
+      ["50-300 人企業是合適首批客群", "segment", "high"],
+      ["15 家餐廳能支援午餐尖峰", "operations", "high"],
+      ["集中配送可維持可接受準時率", "logistics", "high"],
+      ["企業願意接受平台服務費", "pricing", "high"],
+      ["個資食安稅務保險可在 8 週內處理", "governance", "high"]
+    ];
+
+    const competitors = [
+      ["外送平台企業方案", 82],
+      ["傳統團膳餐盒", 76],
+      ["行政直接訂購", 68],
+      ["員工個別訂餐", 60],
+      ["CampusGo 企業團膳", 54]
+    ];
+
+    const pains = [
+      ["準時配送", 4],
+      ["對帳憑證", 3],
+      ["名單取消", 3],
+      ["午間產能", 3],
+      ["個資疑慮", 2],
+      ["取餐等待", 2]
+    ];
+
+    const complaints = [
+      ["DELIVERY", 156],
+      ["ORDER_ACCURACY", 134],
+      ["PAYMENT", 99],
+      ["FOOD_QUALITY", 46],
+      ["CANCELLATION", 40],
+      ["SERVICE", 30],
+      ["FOOD_SAFETY", 19]
+    ];
+
+    const formatMoney = value => new Intl.NumberFormat("zh-TW").format(Math.round(value));
+    const formatShort = value => {
+      if (value >= 100000000) return (value / 100000000).toFixed(2) + " 億";
+      if (value >= 10000) return (value / 10000).toFixed(1) + " 萬";
+      return formatMoney(value);
+    };
+
+    function drawBarChart(canvasId, labels, datasets, options = {}) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext("2d");
+      const rect = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.max(640, rect.width * ratio);
+      canvas.height = 280 * ratio;
+      ctx.scale(ratio, ratio);
+      const width = canvas.width / ratio;
+      const height = 280;
+      ctx.clearRect(0, 0, width, height);
+
+      const pad = { top: 24, right: 24, bottom: 42, left: 54 };
+      const plotW = width - pad.left - pad.right;
+      const plotH = height - pad.top - pad.bottom;
+      const allValues = datasets.flatMap(d => d.values);
+      const minValue = options.min ?? Math.min(0, ...allValues);
+      const maxValue = options.max ?? Math.max(...allValues) * 1.08;
+      const zeroY = pad.top + plotH - ((0 - minValue) / (maxValue - minValue)) * plotH;
+
+      ctx.strokeStyle = "#d9e0de";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top);
+      ctx.lineTo(pad.left, pad.top + plotH);
+      ctx.lineTo(pad.left + plotW, pad.top + plotH);
+      ctx.stroke();
+
+      if (minValue < 0) {
+        ctx.strokeStyle = "#a8b5b1";
+        ctx.beginPath();
+        ctx.moveTo(pad.left, zeroY);
+        ctx.lineTo(pad.left + plotW, zeroY);
+        ctx.stroke();
+      }
+
+      const groupW = plotW / labels.length;
+      const barW = Math.min(38, groupW / (datasets.length + 1.4));
+
+      datasets.forEach((dataset, di) => {
+        ctx.fillStyle = dataset.color;
+        dataset.values.forEach((value, i) => {
+          const x = pad.left + i * groupW + groupW / 2 - (datasets.length * barW) / 2 + di * barW;
+          const y = pad.top + plotH - ((value - minValue) / (maxValue - minValue)) * plotH;
+          const h = Math.abs(zeroY - y || pad.top + plotH - y);
+          const top = value >= 0 ? y : zeroY;
+          ctx.fillRect(x, top, barW * .82, Math.max(2, h));
+        });
+      });
+
+      ctx.fillStyle = "#42504c";
+      ctx.font = "12px Microsoft JhengHei, sans-serif";
+      ctx.textAlign = "center";
+      labels.forEach((label, i) => {
+        const x = pad.left + i * groupW + groupW / 2;
+        ctx.fillText(label, x, height - 16);
+      });
+
+      ctx.textAlign = "left";
+      datasets.forEach((dataset, i) => {
+        const x = pad.left + i * 130;
+        ctx.fillStyle = dataset.color;
+        ctx.fillRect(x, 8, 12, 12);
+        ctx.fillStyle = "#42504c";
+        ctx.fillText(dataset.label, x + 18, 18);
+      });
+    }
+
+    function renderTables() {
+      document.getElementById("quarterTable").innerHTML = quarters.map(row => `
+        <tr>
+          <td><b>${row.q}</b></td>
+          <td class="number">${formatMoney(row.orders)}</td>
+          <td class="number">${formatMoney(row.gmv)}</td>
+          <td class="number">${row.avg}</td>
+          <td class="number">${row.onTime.toFixed(2)}%</td>
+          <td class="number">${row.issue.toFixed(2)}%</td>
+          <td class="number">${row.lunch.toFixed(2)}%</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("samCards").innerHTML = sam.map(item => `
+        <article class="panel scenario">
+          <h3>${item.name} SAM</h3>
+          <strong>${formatShort(item.annualGmv)}</strong>
+          <p>${item.firms} 家企業 x ${item.employees} 人 x 每週 ${item.freq} 次 x 95.89 元 x 50 週</p>
+          <span class="badge">${item.status}</span>
+        </article>
+      `).join("");
+
+      const maxSom = Math.max(...som.map(item => item.share));
+      document.getElementById("somBars").innerHTML = som.map(item => `
+        <div class="bar-row">
+          <b>${item.name}</b>
+          <div class="track"><div class="fill" style="width:${item.share / maxSom * 100}%"></div></div>
+          <span class="number">${item.share.toFixed(2)}%</span>
+        </div>
+        <div class="metric-note">${formatMoney(item.meals)} 份餐，8 週 GMV ${formatMoney(item.gmv)} 元，每週 ${formatMoney(item.weeklyMeals)} 份</div>
+      `).join("");
+
+      document.getElementById("roiTable").innerHTML = roi.map(item => `
+        <tr>
+          <td><b>${item.name}</b></td>
+          <td class="number">${formatMoney(item.gmv)}</td>
+          <td class="number">${formatMoney(item.revenue)}</td>
+          <td class="number">${formatMoney(item.variableCost)}</td>
+          <td class="number ${item.contribution < 0 ? "risk" : "ok"}">${formatMoney(item.contribution)}</td>
+          <td class="number risk">${item.roi.toFixed(1)}%</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("assumptionHeat").innerHTML = assumptions.map(item => `
+        <div class="heat-cell high">
+          <b>${item[0]}</b>
+          <span>${item[1]} · impact ${item[2]} · confidence low</span>
+        </div>
+      `).join("");
+
+      const maxCompetitor = Math.max(...competitors.map(item => item[1]));
+      document.getElementById("competitorBars").innerHTML = competitors.map(item => `
+        <div class="bar-row">
+          <b>${item[0]}</b>
+          <div class="track"><div class="fill" style="width:${item[1] / maxCompetitor * 100}%"></div></div>
+          <span class="number">${item[1]}</span>
+        </div>
+      `).join("");
+
+      const maxPain = Math.max(...pains.map(item => item[1]));
+      document.getElementById("painBars").innerHTML = pains.map(item => `
+        <div class="bar-row">
+          <b>${item[0]}</b>
+          <div class="track"><div class="fill" style="width:${item[1] / maxPain * 100}%"></div></div>
+          <span class="number">${item[1]} 筆</span>
+        </div>
+      `).join("");
+
+      const maxComplaint = Math.max(...complaints.map(item => item[1]));
+      document.getElementById("complaintBars").innerHTML = complaints.map(item => `
+        <div class="bar-row">
+          <b>${item[0]}</b>
+          <div class="track"><div class="fill" style="width:${item[1] / maxComplaint * 100}%"></div></div>
+          <span class="number">${item[1]} 件</span>
+        </div>
+      `).join("");
+    }
+
+    function renderCharts() {
+      drawBarChart(
+        "quarterChart",
+        quarters.map(row => row.q),
+        [
+          { label: "GMV 百萬元", color: "#0f766e", values: quarters.map(row => row.gmv / 1000000) },
+          { label: "訂單萬筆", color: "#2563eb", values: quarters.map(row => row.orders / 10000) }
+        ],
+        { min: 0 }
+      );
+
+      drawBarChart(
+        "qualityChart",
+        quarters.map(row => row.q),
+        [
+          { label: "準時率", color: "#15803d", values: quarters.map(row => row.onTime) },
+          { label: "異常率", color: "#dc2626", values: quarters.map(row => row.issue) }
+        ],
+        { min: 0, max: 100 }
+      );
+
+      drawBarChart(
+        "samChart",
+        sam.map(row => row.name),
+        [{ label: "年 GMV 百萬元", color: "#0f766e", values: sam.map(row => row.annualGmv / 1000000) }],
+        { min: 0 }
+      );
+
+      drawBarChart(
+        "roiChart",
+        roi.map(row => row.name),
+        [{ label: "ROI %", color: "#dc2626", values: roi.map(row => row.roi) }],
+        { min: -120, max: 0 }
+      );
+    }
+
+    renderTables();
+    renderCharts();
+    window.addEventListener("resize", () => {
+      window.clearTimeout(window.__chartTimer);
+      window.__chartTimer = window.setTimeout(renderCharts, 120);
+    });
+  </script>
 </body>
 </html>
